@@ -1,5 +1,6 @@
 package com.reactnativeaesgcmcrypto
 
+import android.util.Log
 import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import java.io.File
@@ -83,6 +84,8 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
                   iv: String,
                   tag: String,
                   promise: Promise) {
+    Log.d("AesGcmCrypto", "🔥 FORKED VERSION - decryptFile called with STREAMING (buffer: $BUFFER_SIZE bytes)")
+    Log.d("AesGcmCrypto", "Input file: $inputFilePath")
     try {
       val keyData = Base64.getDecoder().decode(key)
       val secretKey: SecretKey = getSecretKeyFromString(keyData)
@@ -145,6 +148,8 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
                   outputFilePath: String,
                   key: String,
                   promise: Promise) {
+    Log.d("AesGcmCrypto", "🔥 FORKED VERSION - encryptFile called with STREAMING (buffer: $BUFFER_SIZE bytes)")
+    Log.d("AesGcmCrypto", "Input file: $inputFilePath")
     try {
       val keyData = Base64.getDecoder().decode(key)
       val secretKey: SecretKey = getSecretKeyFromString(keyData)
