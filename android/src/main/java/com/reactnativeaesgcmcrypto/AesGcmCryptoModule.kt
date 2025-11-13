@@ -41,7 +41,7 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
     val secretKey: SecretKey = getSecretKeyFromString(key)
     val ivData = iv.hexStringToByteArray()
     val tagData = tag.hexStringToByteArray()
-    val cipher = Cipher.getInstance("AES/GCM/NoPadding", BouncyCastleProvider.PROVIDER_NAME)
+    val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     val spec = GCMParameterSpec(GCM_TAG_LENGTH * 8, ivData)
     cipher.init(Cipher.DECRYPT_MODE, secretKey, spec)
     return cipher.doFinal(ciphertext + tagData)
@@ -50,7 +50,7 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
   fun encryptData(plainData: ByteArray, key: ByteArray): EncryptionOutput {
     val secretKey: SecretKey = getSecretKeyFromString(key)
 
-    val cipher = Cipher.getInstance("AES/GCM/NoPadding", BouncyCastleProvider.PROVIDER_NAME)
+    val cipher = Cipher.getInstance("AES/GCM/NoPadding")
     cipher.init(Cipher.ENCRYPT_MODE, secretKey)
     val iv = cipher.iv.copyOf()
     val result = cipher.doFinal(plainData)
@@ -98,7 +98,7 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
       val ivData = iv.hexStringToByteArray()
       val tagData = tag.hexStringToByteArray()
 
-      val cipher = Cipher.getInstance("AES/GCM/NoPadding", BouncyCastleProvider.PROVIDER_NAME)
+      val cipher = Cipher.getInstance("AES/GCM/NoPadding")
       val spec = GCMParameterSpec(GCM_TAG_LENGTH * 8, ivData)
       cipher.init(Cipher.DECRYPT_MODE, secretKey, spec)
 
@@ -164,7 +164,7 @@ class AesGcmCryptoModule(reactContext: ReactApplicationContext) : ReactContextBa
     try {
       val keyData = Base64.getDecoder().decode(key)
       val secretKey: SecretKey = getSecretKeyFromString(keyData)
-      val cipher = Cipher.getInstance("AES/GCM/NoPadding", BouncyCastleProvider.PROVIDER_NAME)
+      val cipher = Cipher.getInstance("AES/GCM/NoPadding")
       cipher.init(Cipher.ENCRYPT_MODE, secretKey)
       val iv = cipher.iv.copyOf()
 
